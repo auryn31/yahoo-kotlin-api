@@ -15,7 +15,7 @@ fun loadStockPrice(ticker: String): StockPrice? {
             .uri(URI.create("$BASE_URL/quote/$ticker/"))
             .build()
     val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-    return getStockpriceFromResponse(response.body(), ticker)
+    return getStockPriceFromResponse(response.body(), ticker)
 }
 
 fun findJsonStockPriceFromWebsite(response: String, ticker: String): String {
@@ -37,5 +37,5 @@ fun findJsonStockPriceFromWebsite(response: String, ticker: String): String {
     return response.substring(startPosition, index + 1)
 }
 
-fun getStockpriceFromResponse(response: String, ticker: String): StockPrice? = StockPrice.fromJson(findJsonStockPriceFromWebsite(response, ticker))
+fun getStockPriceFromResponse(response: String, ticker: String): StockPrice? = StockPrice.fromJson(findJsonStockPriceFromWebsite(response, ticker))
 

@@ -3,6 +3,7 @@
  */
 package yahoo.micronaut
 
+import io.micronaut.runtime.Micronaut
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
@@ -16,16 +17,24 @@ class App {
 
 val TICKER = arrayListOf("WLD.PA", "NADQ.F", "E127.DE", "QDVE.DE")
 
-public fun main() {
-    val time = measureTimeMillis {
-        runBlocking {
-            for (ticker in TICKER) {
-                launch {
-                    println("$ticker : ${loadStockPrice(ticker)?.regularMarketPrice?.raw}")
-                }
-            }
-            println("started all routines")
-        }
-    }
-    println("Completed in $time ms")
+
+fun main(args: Array<String>) {
+    Micronaut.build()
+            .args(*args)
+            .packages("example.micronaut")
+            .start()
 }
+
+//fun main() {
+//    val time = measureTimeMillis {
+//        runBlocking {
+//            for (ticker in TICKER) {
+//                launch {
+//                    println("$ticker : ${loadStockPrice(ticker)?.regularMarketPrice?.raw}")
+//                }
+//            }
+//            println("started all routines")
+//        }
+//    }
+//    println("Completed in $time ms")
+//}

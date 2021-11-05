@@ -4,6 +4,11 @@
 package yahoo.micronaut
 
 import com.google.common.io.Resources
+import io.micronaut.http.client.annotation.Client
+import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
+import io.micronaut.http.client.HttpClient
+import io.micronaut.http.HttpRequest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -18,8 +23,23 @@ class AppTest {
     @Test
     fun parseSubJSONFromYahooResponseTest() {
         val responseHTML = Resources.getResource("response.txt").readText()
-        val response = getStockpriceFromResponse(responseHTML, "WLD.PA")
+        val response = getStockPriceFromResponse(responseHTML, "WLD.PA")
 
         assertEquals(response?.regularMarketPrice?.raw, 278.37)
     }
 }
+
+//@MicronautTest
+//class HelloControllerTest {
+//    @Inject
+//    @field:Client("/")
+//    lateinit var client : HttpClient
+//
+//    @Test
+//    fun testHello() {
+//        val request: HttpRequest<Any> = HttpRequest.GET("/hello")
+//        val body = client.toBlocking().retrieve(request)
+//        assertNotNull(body)
+//        assertEquals("Hello World", body)
+//    }
+//}
