@@ -11,6 +11,6 @@ val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
     Micronaut.build()
             .args(*args)
-            .packages("example.micronaut")
+            .packages("yahoo.micronaut")
             .start()
 }
