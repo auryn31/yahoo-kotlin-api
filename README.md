@@ -1,3 +1,3 @@
 # Yahoo Kotlin API with Micronaut
 
-- see [blogpost](blog.auryn.dev/posts/kotlin-yahoo-api/)
+- see [blogpost](https://blog.auryn.dev/posts/kotlin-yahoo-api/)
