@@ -4,11 +4,12 @@
 package yahoo.micronaut
 
 import com.google.common.io.Resources
+import io.micronaut.http.HttpRequest
+import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
-import io.micronaut.http.client.HttpClient
-import io.micronaut.http.HttpRequest
+import yahoo.micronaut.controller.getStockPriceFromResponse
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -29,17 +30,17 @@ class AppTest {
     }
 }
 
-//@MicronautTest
-//class HelloControllerTest {
-//    @Inject
-//    @field:Client("/")
-//    lateinit var client : HttpClient
-//
-//    @Test
-//    fun testHello() {
-//        val request: HttpRequest<Any> = HttpRequest.GET("/hello")
-//        val body = client.toBlocking().retrieve(request)
-//        assertNotNull(body)
-//        assertEquals("Hello World", body)
-//    }
-//}
+@MicronautTest
+class HelloControllerTest {
+    @Inject
+    @field:Client("/")
+    lateinit var client: HttpClient
+
+    @Test
+    fun testHello() {
+        val request: HttpRequest<Any> = HttpRequest.GET("/api/WLD.PA")
+        val body = client.toBlocking().retrieve(request)
+        assertNotNull(body)
+        assert(body.length > 100)
+    }
+}

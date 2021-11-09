@@ -1,4 +1,4 @@
-package yahoo.micronaut
+package yahoo.micronaut.controller
 
 import yahoo.micronaut.models.StockPrice
 import java.net.URI

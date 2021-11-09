@@ -1,9 +1,8 @@
 package yahoo.micronaut.controller
 
-import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Produces
+import reactor.core.publisher.Mono
 import yahoo.micronaut.models.StockPrice
 
 
@@ -11,7 +10,7 @@ import yahoo.micronaut.models.StockPrice
 class RestController(private val yahooController: YahooController) {
 
     @Get("/{ticker}")
-    fun greet(ticker: String): StockPrice? {
-        return yahooController.loadStockForTicker(ticker)
+    fun greet(ticker: String): Mono<StockPrice> {
+        return Mono.justOrEmpty(yahooController.loadStockForTicker(ticker))
     }
 }

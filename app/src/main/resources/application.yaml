@@ -1,3 +1,7 @@
 micronaut:
   application:
     name: stockprice
+  caches:
+    stocks:
+      charset: 'UTF-8'
+      expire-after-write: 10s

@@ -4,9 +4,6 @@
 package yahoo.micronaut
 
 import io.micronaut.runtime.Micronaut
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlin.system.measureTimeMillis
 
 class App {
     val greeting: String
