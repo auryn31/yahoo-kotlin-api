@@ -73,7 +73,10 @@ dependencies {
     implementation "io.micronaut.cache:micronaut-cache-caffeine"
     implementation 'io.github.microutils:kotlin-logging:1.12.5'
 
-    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    // add the health endpoint to deploy on aws
+    implementation "io.micronaut:micronaut-management"
+
+    runtimeOnly "com.fasterxml.jackson.module:jackson-module-kotlin"
 
     // Use the Kotlin test library.
     testImplementation 'org.jetbrains.kotlin:kotlin-test'

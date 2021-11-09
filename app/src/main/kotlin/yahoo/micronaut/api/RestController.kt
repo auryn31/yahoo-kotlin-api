@@ -7,10 +7,8 @@ import yahoo.micronaut.controller.YahooController
 import yahoo.micronaut.logger
 import yahoo.micronaut.models.StockPrice
 
-
 @Controller("/api")
 class RestController(private val yahooController: YahooController) {
-
 
     @Get("/{ticker}")
     fun greet(ticker: String): Mono<StockPrice> {

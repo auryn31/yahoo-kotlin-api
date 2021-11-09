@@ -6,6 +6,7 @@ package yahoo.micronaut
 import io.micronaut.runtime.Micronaut
 import mu.KotlinLogging
 
+// instatiate logger for usage
 val logger = KotlinLogging.logger {}
 
 fun main(args: Array<String>) {

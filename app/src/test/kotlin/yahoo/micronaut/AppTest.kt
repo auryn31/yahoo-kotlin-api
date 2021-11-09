@@ -17,7 +17,7 @@ import kotlin.test.assertNotNull
 class AppTest {
 
     @Test
-    fun parseSubJSONFromYahooResponseTest() {
+    fun `parse a yahoo response to get a response that contains a current price`() {
         val responseHTML = Resources.getResource("response.txt").readText()
         val response = getStockPriceFromResponse(responseHTML, "WLD.PA")
 
@@ -26,16 +26,25 @@ class AppTest {
 }
 
 @MicronautTest
-class HelloControllerTest {
+class YahooControllerTest {
     @Inject
     @field:Client("/")
     lateinit var client: HttpClient
 
     @Test
-    fun testHello() {
+    fun `request the api endpoint and expect to have a result, that is not null`() {
         val request: HttpRequest<Any> = HttpRequest.GET("/api/WLD.PA")
         val body = client.toBlocking().retrieve(request)
         assertNotNull(body)
         assert(body.length > 100)
+    }
+
+    @Test
+    fun `request the health endpoint and get an status up as response`() {
+        val request: HttpRequest<Any> = HttpRequest.GET("/health")
+        val m = client.toBlocking().retrieve(request, Map::class.java)
+        assertNotNull(m)
+        assert(m.containsKey("status"))
+        assertEquals(m.get("status"), "UP")
     }
 }
