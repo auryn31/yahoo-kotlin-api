@@ -4,16 +4,9 @@
 package yahoo.micronaut
 
 import io.micronaut.runtime.Micronaut
+import mu.KotlinLogging
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
-
-val TICKER = arrayListOf("WLD.PA", "NADQ.F", "E127.DE", "QDVE.DE")
-
+val logger = KotlinLogging.logger {}
 
 fun main(args: Array<String>) {
     Micronaut.build()
@@ -21,17 +14,3 @@ fun main(args: Array<String>) {
             .packages("example.micronaut")
             .start()
 }
-
-//fun main() {
-//    val time = measureTimeMillis {
-//        runBlocking {
-//            for (ticker in TICKER) {
-//                launch {
-//                    println("$ticker : ${loadStockPrice(ticker)?.regularMarketPrice?.raw}")
-//                }
-//            }
-//            println("started all routines")
-//        }
-//    }
-//    println("Completed in $time ms")
-//}

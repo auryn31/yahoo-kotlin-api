@@ -1,5 +1,7 @@
 package yahoo.micronaut.controller
 
+import com.beust.klaxon.KlaxonException
+import yahoo.micronaut.logger
 import yahoo.micronaut.models.StockPrice
 import java.net.URI
 import java.net.http.HttpClient
@@ -10,6 +12,7 @@ private const val BASE_URL = "https://finance.yahoo.com"
 
 
 fun loadStockPrice(ticker: String): StockPrice? {
+    logger.info {"Load data for ticker: $ticker from $BASE_URL"}
     val client = HttpClient.newBuilder().build()
     val request = HttpRequest.newBuilder()
             .uri(URI.create("$BASE_URL/quote/$ticker/"))
@@ -37,5 +40,12 @@ fun findJsonStockPriceFromWebsite(response: String, ticker: String): String {
     return response.substring(startPosition, index + 1)
 }
 
-fun getStockPriceFromResponse(response: String, ticker: String): StockPrice? = StockPrice.fromJson(findJsonStockPriceFromWebsite(response, ticker))
+fun getStockPriceFromResponse(response: String, ticker: String): StockPrice? {
+    return try {
+        StockPrice.fromJson(findJsonStockPriceFromWebsite(response, ticker))
+    } catch (e: KlaxonException) {
+        logger.info { "Could not parse response for ticker: $ticker" }
+        null
+    }
+}
 
